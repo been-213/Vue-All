@@ -9,7 +9,9 @@
           <li>
             <router-link to="/todolist">ToDoList</router-link>
           </li>
-          <li>2</li>
+          <li>
+            <router-link to="/JSONP">JSONP</router-link>
+          </li>
           <li>3</li>
           <li>4</li>
           <li>5</li>
