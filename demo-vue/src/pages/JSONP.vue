@@ -1,6 +1,7 @@
 <template>
   <main>
-    <input type="text" @keyup="query()" v-model="key">
+    <h1>Baidu JSONP</h1>
+    <input type="text" @keyup="query()" v-model="key" placeholder="请输入搜索内容...">
     <ul>
       <li
       :key="index"
@@ -35,13 +36,16 @@ export default {
 }
 </script>
 <style scoped>
+h1{
+  font-size:1cm;
+}
 * {
   padding:0;
   margin: 0;
 }
 input{
   font-size: 100%;
-  margin: auto;
+  margin: 10% auto 0;
   width:700px;
   height: 30px;
 }
