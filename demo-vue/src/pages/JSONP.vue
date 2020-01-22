@@ -39,10 +39,7 @@ export default {
 h1{
   font-size:1cm;
 }
-* {
-  padding:0;
-  margin: 0;
-}
+
 input{
   font-size: 100%;
   margin: 10% auto 0;
@@ -54,7 +51,7 @@ ul {
   width: 700px;
   margin:0 auto;
   border: 1px solid #e9e9e9;
-
+  padding:0;
 }
 li {
   text-align: left;
@@ -65,5 +62,8 @@ li {
 }
 li:hover{
   background-color: #ccc;
+}
+main {
+  text-align: center;
 }
 </style>

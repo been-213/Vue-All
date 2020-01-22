@@ -34,4 +34,7 @@ p{
 ul{
   list-style-type: none;
 }
+main{
+  text-align: center;
+}
 </style>

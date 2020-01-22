@@ -93,5 +93,6 @@ span{
 }
 main{
     font-size: 120%;
+    text-align: center;
 }
 </style>
