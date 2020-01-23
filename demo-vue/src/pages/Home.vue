@@ -6,8 +6,24 @@
           <router-link to="/todolist"><h4>Been's Demo</h4></router-link>
           <router-link to="/2-1"><h4>Been's Learning Note's</h4></router-link>
           <footer>
-            <el-button type="text">Login</el-button>
+            <el-button type="text" @click="dialogLoginVisible=true">Login</el-button>
           </footer>
+
+          <el-dialog title="LOGIN" :visible.sync="dialogLoginVisible" width="30%">
+          <el-form :model="form">
+            <el-form-item label="Username" :label-width="formLabelWidth">
+              <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="Password" :label-width="formLabelWidth">
+              <el-input v-model="form.password" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogLoginVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="dialogLoginVisible = false">Login</el-button>
+          </div>
+        </el-dialog>
+
           </div>   
       </div>
   </main>
@@ -16,9 +32,19 @@
 <script>
 export default {
     name:'Home',
+    data () {
+      return {
+        dialogLoginVisible:false,
+        formLabelWidth: '120px',
+         form: {
+          Username:'',
+          Password:''
+        },
+      }
+    },
     beforeCreate () {
       var background = document.body.style;
-      background.backgroundImage='url(' + require('../assets/HBackgroud.jpg') + ')';
+      background.backgroundImage='url(' + require('../assets/HBackground.jpg') + ')';
       background.backgroundRepeat = "no-repeat";
       background.backgroundSize = "cover";
       background.backgroundAttachment='fixed';
@@ -33,10 +59,8 @@ export default {
 main{
   color: white;
   font-size: 200%;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding-top: 22%;
+  padding-left: 10%;
+  padding-top: 15%;
 }
 a{
   color: white;
@@ -45,7 +69,6 @@ a{
 h4{
   width: 400px;
   background-color: rgb(46, 45, 45,0.5);
-  border-radius: 30%;
 }
 h1{
   width: 400px;
@@ -56,10 +79,24 @@ h1{
   color: white;
   font-size: 100%;
 }
+.el-button--text:focus{
+  color:rgb(182, 176, 176);
+}
 .el-button--text:hover{
   color: rgb(182, 176, 176);
 }
+.el-button--primary {
+  background-color: rgb(0, 0, 0,0.5);
+  border-color: rgb(0, 0, 0,0.5);
+}
+.el-button--primary:hover{
+  background-color: rgb(182, 176, 176);
+}
 h4:hover{
   color: rgb(182, 176, 176);
+}
+footer{
+  width: 400px;
+  background-color:  rgb(0, 0, 0,0.5);
 }
 </style>
