@@ -20,7 +20,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogLoginVisible = false">Cancel</el-button>
-            <el-button type="primary" @click="dialogLoginVisible = false">Login</el-button>
+            <el-button type="primary" @click=login()>Login</el-button>
           </div>
         </el-dialog>
 
@@ -40,6 +40,14 @@ export default {
           Username:'',
           Password:''
         },
+      }
+    },
+    methods: {
+      login:function() {
+        this.dialogLoginVisible = false;
+        this.$http.get('/api/login').then((res) => {
+          alert(res)
+        })
       }
     },
     beforeCreate () {
@@ -91,6 +99,7 @@ h1{
 }
 .el-button--primary:hover{
   background-color: rgb(182, 176, 176);
+  border: black;
 }
 h4:hover{
   color: rgb(182, 176, 176);

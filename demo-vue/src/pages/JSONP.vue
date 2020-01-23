@@ -21,15 +21,13 @@ export default {
   methods: {
     query: function () {
       var that = this
-      that.$http.jsonp("https://www.baidu.com/sugrec",{
-        params: {
+      that.$jsonp("https://www.baidu.com/sugrec",{
           prod: 'pc',
           wd: this.key
-        }
-      }).then(function(res){
-        this.list = res.body.g;
-      },function(error){
-        alert(error.toString())
+      }).then(json => {
+        this.list = json.g;
+      }).catch(err => {
+        alert(err.toString());
       })
     }
   }
