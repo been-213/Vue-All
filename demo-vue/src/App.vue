@@ -1,7 +1,7 @@
 <template>
   <main id="app">
-    <el-container style="height: 100%; border: 1px solid #eee">
-    <el-aside>
+    <el-container>
+    <el-aside v-if="iHome">
       <Aside/>
   </el-aside>
   
@@ -23,6 +23,11 @@ export default {
   name: 'app',
   components: {
     Aside
+  },
+  computed:{
+    iHome:function() {
+      return this.$route.path != '/'
+    }
   }
 }
 </script>

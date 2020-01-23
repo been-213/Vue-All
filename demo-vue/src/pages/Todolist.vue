@@ -92,7 +92,7 @@ span{
     padding: 5%;
 }
 main{
-    font-size: 120%;
+    font-size: 150%;
     text-align: center;
 }
 </style>
