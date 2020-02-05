@@ -1,6 +1,41 @@
 var TodoTaskModel = require('../models/todotasks');
 var FinishedTaskModel =require('../models/finishedtasks');
+var UserModel = require('../models/users');
 module.exports = {
+  //User
+  Save(data){
+    return new Promise((resolve,reject) => {
+      UserModel.create(data,(error,doc) => {
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
+  },
+  find(data={},feilds=null,options={}) {
+    return new Promise((resolve,reject)=> {
+      UserModel.find(data,feilds,options,(error,doc)=> {
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
+  },
+  findOne(data){
+    return new Promise((resolve,reject) => {
+      UserModel.findOne(data,(error,doc)=>{
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
+  },
   //获取todolist
   findTodo(data={},feilds=null,options={}) {
     return new Promise((resolve,reject) => {

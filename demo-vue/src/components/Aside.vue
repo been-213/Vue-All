@@ -4,7 +4,7 @@
           <el-menu
           router
           default-active="2">
-          <el-menu-item id="Home" index="/">Home</el-menu-item>
+          <el-menu-item id="Home" index="/">Home(logout)</el-menu-item>
           <el-submenu index="1">
             <template slot="title">
               <h3>Demo</h3>

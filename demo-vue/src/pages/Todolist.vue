@@ -43,7 +43,6 @@ export default {
     },
     created:function(){
             Axios.get('/api/todoTask/getTodoTask').then((res)=>{
-                console.log(res.data);
                 this.Todolist = res.data;
             }),
             Axios.get('/api/todoTask/getFinishedTask').then((res)=>{
@@ -71,9 +70,7 @@ export default {
             this.Todolist.push(revokedTask);
         },
         saveTask: function(){
-            Axios.post('/api/todoTask/uploadTodoTask',this.Todolist).then((res) => {
-            console.log(res)
-            }).catch((err)=>{
+            Axios.post('/api/todoTask/uploadTodoTask',this.Todolist).then((res) => {}).catch((err)=>{
                 alert(err);
             }),
             Axios.post('/api/todoTask/uploadFinishedTask',this.FinishedList).then((res) => {
@@ -109,5 +106,9 @@ span{
 main{
     font-size: 150%;
     text-align: center;
+}
+.el-button:focus{
+    background-color: white;
+
 }
 </style>
