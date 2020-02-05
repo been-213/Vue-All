@@ -26,10 +26,12 @@
             </li>
         </ul>
     </div>
+    <el-button @click="saveTask()">Save</el-button>
 </main>
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
     name: 'Todolist',
     data () {
@@ -40,12 +42,13 @@ export default {
         }
     },
     created:function(){
-                this.Todolist = JSON.parse(localStorage.TodoList);
-                this.FinishedList = JSON.parse(localStorage.FinishedList);
-    },
-    updated:function(){
-        localStorage.setItem('TodoList',JSON.stringify(this.Todolist));
-        localStorage.setItem('FinishedList',JSON.stringify(this.FinishedList));
+            Axios.get('/api/todoTask/getTodoTask').then((res)=>{
+                console.log(res.data);
+                this.Todolist = res.data;
+            }),
+            Axios.get('/api/todoTask/getFinishedTask').then((res)=>{
+                this.FinishedList = res.data;
+            })
     },
     methods:{
         addNewTask: function() {
@@ -66,6 +69,18 @@ export default {
         revokeTask:function(index){
             var revokedTask = this.FinishedList.splice(index,1)[0];
             this.Todolist.push(revokedTask);
+        },
+        saveTask: function(){
+            Axios.post('/api/todoTask/uploadTodoTask',this.Todolist).then((res) => {
+            console.log(res)
+            }).catch((err)=>{
+                alert(err);
+            }),
+            Axios.post('/api/todoTask/uploadFinishedTask',this.FinishedList).then((res) => {
+            alert(JSON.stringify(res.data));
+            }).catch((err)=>{
+                alert(err);
+            })
         }
     }
 }

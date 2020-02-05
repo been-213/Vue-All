@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import {login} from '../server/index';
 export default {
     name:'Home',
     data () {
@@ -45,9 +46,7 @@ export default {
     methods: {
       login:function() {
         this.dialogLoginVisible = false;
-        this.$http.get('/api/login').then((res) => {
-          alert(res)
-        })
+        login();
       }
     },
     beforeCreate () {
