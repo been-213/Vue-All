@@ -1,6 +1,7 @@
 var TodoTaskModel = require('../models/todotasks');
 var FinishedTaskModel =require('../models/finishedtasks');
 var UserModel = require('../models/users');
+var ArticleModel = require('../models/blogs');
 module.exports = {
   //User
   Save(data){
@@ -101,5 +102,50 @@ module.exports = {
         })
       })
   })
+  },
+  //Artical
+  saveArtical(data){
+    return new Promise((resolve,reject) => {
+      ArticleModel.create(data,(error,doc) => {
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
+  },
+  findArticle(data={},feilds=null,options={}){
+    return new Promise((resolve,reject) => {
+      ArticleModel.find(data,feilds,options,(error,doc) => {
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
+  },
+  findOneArticle(data){
+    return new Promise((resolve,reject) => {
+      ArticleModel.findOne(data,(error,doc) => {
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
+  },
+  remove(data){
+    return new Promise((resolve,reject) => {
+      ArticleModel.remove(data,(error,doc) =>{
+        if(error){
+          reject(error)
+        }else{
+          resolve(doc)
+        }
+      })
+    })
   }
 }

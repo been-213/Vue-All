@@ -5,16 +5,6 @@ var api = require('../lib/api');
 
 var jsonParser = bodyParser.json();
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/login',(req,res,next) => {
-  res.json({
-    data: 'get success'
-  })
-})
-
 router.get('/getToDoTask',(req,res,next) => {
   api.findTodo({}).then((data) => {res.json(data)});
 })

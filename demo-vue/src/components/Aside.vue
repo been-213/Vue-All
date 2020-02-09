@@ -19,9 +19,13 @@
             <template slot="title">
               <h3>Learing Notes</h3>
             </template>
+            <el-menu-item id="upload" index="/articleupload">upload Notes</el-menu-item>
           <el-menu-item-group>
-            <el-menu-item index="2-1">2-1</el-menu-item>
-            <el-menu-item index="2-2">2-2</el-menu-item>
+            <el-menu-item 
+            @click="gotoAritcle(item)"
+            :key="index"
+            v-for="(item,index) in articleList"
+            >{{item}}</el-menu-item>
           </el-menu-item-group>
           </el-submenu>
           </el-menu>
@@ -29,11 +33,26 @@
   </main>
 </template>
 <script>
+import {getArticleList} from '../server/article';
 export default {
-    name: 'Aside'
+    name: 'Aside',
+    data () {
+      return {
+        articleList: []
+      }
+    },
+    beforeCreate: function () {
+      getArticleList().then((res) => {
+        this.articleList = res.data;
+      })
+    },
+    methods: {
+      gotoAritcle:function (article) {
+        this.$router.push({name: 'article', params:{articleTitle:article}}).catch(err => {err});
+      }
+    }
 }
 </script>
-ß
 <style scoped>
 #tit {
   font-weight: bolder;
@@ -49,5 +68,11 @@ main {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     font-weight: bold;
+}
+.el-menu-item.is-active {
+    color: black;
+}
+#upload {
+  font-weight: bolder;
 }
 </style>

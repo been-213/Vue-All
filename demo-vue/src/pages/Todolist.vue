@@ -70,13 +70,33 @@ export default {
             this.Todolist.push(revokedTask);
         },
         saveTask: function(){
-            Axios.post('/api/todoTask/uploadTodoTask',this.Todolist).then((res) => {}).catch((err)=>{
-                alert(err);
-            }),
-            Axios.post('/api/todoTask/uploadFinishedTask',this.FinishedList).then((res) => {
-            alert(JSON.stringify(res.data));
-            }).catch((err)=>{
-                alert(err);
+            Axios.post('/api/todoTask/uploadTodoTask',this.Todolist).then((res,err) => {
+                if(err){
+                    this.openNotifyFailed();
+                }else{
+                    this.openNotifySuccess();
+                }
+            });
+            Axios.post('/api/todoTask/uploadFinishedTask',this.FinishedList).then((res,err) => {
+                if(err){
+                    this.openNotifyFailed();
+                }else{
+                    this.openNotifySuccess();
+                }
+            });
+        },
+        openNotifySuccess: function(){
+            this.$notify({
+                title: 'Success',
+                message: 'Save Success',
+                type: 'success'
+            })
+        },
+        openNotifyFailed: function(){
+            this.$notify({
+                title: 'Failed',
+                message: 'Save Failed',
+                type: 'error'
             })
         }
     }

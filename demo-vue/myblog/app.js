@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var todoTaskRouter = require('./routes/todoTask');
 var usersRouter = require('./routes/users');
+var articleRouter = require('./routes/article');
 
 var db = require('./lib/mongo');
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/todoTask', todoTaskRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/article', articleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -11,10 +11,10 @@ router.post('/logup', function(req, res, next) {
   api.find({Username:newUser.Username}).then((data) => {
     if(data.length === 0){
       api.Save(newUser).then((data) => {
-        res.json({message:'Logup Success',_dig:false});
+        res.json({_dig:false});
       })
     }else{
-      res.json({message:'User is exist',_dig:true});
+      res.json({_dig:true});
     }
   })
 });

@@ -1,15 +1,12 @@
 <template>
   <main id="app">
-    <el-container>
+    <el-container :style="styleObject" style="border: 1px solid #eee">
     <el-aside v-if="iHome">
       <Aside/>
   </el-aside>
-  
-  <el-container>
     <el-main>
         <router-view id="Content" name="Content"></router-view>
     </el-main>
-  </el-container>
 </el-container>
 
 
@@ -27,6 +24,11 @@ export default {
   computed:{
     iHome:function() {
       return this.$route.path != '/'
+    },
+    styleObject: function () {
+      return {
+        height: window.innerHeight + 'px'
+      }
     }
   }
 }
@@ -39,5 +41,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 </style>

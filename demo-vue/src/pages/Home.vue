@@ -25,22 +25,36 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogLoginVisible = false">Cancel</el-button>
-            <el-button type="primary" @click=login()>Login</el-button>
+            <el-button type="primary" @click="login()">Login</el-button>
           </div>
         </el-dialog>
 
         <el-dialog title="LOGUP" :visible.sync="dialogLogupVisible" width="30%">
-          <el-form :model="formLogup">
-            <el-form-item label="Username" :label-width="formLabelWidth">
+          <el-form :model="formLogup" :ref="formLogup" class="demo-ruleForm">
+            <el-form-item label="Username" 
+            :label-width="formLabelWidth" 
+            prop="Username"
+            :rules="[  
+             {required:true,message:'Title should not be null'},
+             {max:16,message:'Title is too long'}
+             ]"
+            >
               <el-input v-model="formLogup.Username" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item label="Password" :label-width="formLabelWidth">
+            <el-form-item label="Password" 
+            prop="Password"
+            :label-width="formLabelWidth"
+            :rules="[  
+             {required:true,message:'Title should not be null'},
+             {max:16,message:'Title is too long'}
+             ]"
+            >
               <el-input v-model="formLogup.Password" show-password=true autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogLogupVisible = false">Cancel</el-button>
-            <el-button type="primary" @click=logup()>Logup</el-button>
+            <el-button type="primary" @click="logup(formLogup)">Logup</el-button>
           </div>
         </el-dialog>
 
@@ -88,18 +102,46 @@ export default {
           }
         })
       },
-      logup: function(){
-        let that = this;
-        Logup_(that.formLogup).then((res) => {
-          alert(res.data.message);
-          if(res.data._dig === false){
-            that.dialogLogupVisible = false;
-            localStorage.ifLogin = true;
-            that.$router.push('/todolist');
-          }else{
-            that.formLogup.Password = '';
+      logup: function(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            Logup_(this.formLogup).then((res) => {
+              if(res.data._dig === false){
+                this.openNotifySuccess();
+                this.dialogLogupVisible = false;
+                localStorage.ifLogin = true;
+                this.$router.push('/todolist');
+              }else{
+                this.formLogup.Password = '';
+                this.openNotifyfailed();
+              }
+            });
+          } else {
+            this.openNotifyError();
+            return false;
           }
         });
+      },
+      openNotifySuccess() {
+        this.$notify({
+          title: 'Success',
+          message: 'SignUP Success',
+          type:'success'
+        });
+      },
+      openNotifyfailed(){
+        this.$notify({
+          title: 'Failed',
+          message: 'The UserName is exist',
+          type: 'error'
+        });
+      },
+      openNotifyError(){
+        this.$notify({
+          title: 'error',
+          message: 'Error Submit',
+          type: 'error'
+        })
       }
     },
     beforeCreate () {
